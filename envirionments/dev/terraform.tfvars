@@ -1,6 +1,6 @@
 resource_group = {
   rg1 = {
-    rg_name    = "mehar_rg"
+    rg_name    = "santan_rg"
     location   = "east us"
     managed_by = "azurerm_user_assigned_identity.test"  # optional
     tags = {
@@ -14,8 +14,8 @@ resource_group = {
 
 virtual_network = {
   vnet1 = {
-    vnet_name     = "meharVnet"
-    rg_name       = "mehar_rg"
+    vnet_name     = "santanVnet"
+    rg_name       = "santan_rg"
     location      = "east us"
     address_space = ["10.0.0.0/16"]
     dns_servers = ["8.8.8.8", "8.8.4.4"]
@@ -23,16 +23,16 @@ virtual_network = {
     tags = {
       environment = "dev"
       project     = "terraform-network"
-      owner       = "mehar"
+      owner       = "santan"
     }
   }
 }
 
 subnet = {
   subnet1 = {
-    subnet_name      = "meharsubnet1"
-    vnet_name        = "meharVnet"
-    rg_name          = "mehar_rg"
+    subnet_name      = "santansubnet1"
+    vnet_name        = "santanVnet"
+    rg_name          = "santan_rg"
     address_prefixes = ["10.0.0.0/24"]
     service_endpoints = ["Microsoft.Storage"]
     delegation = [
@@ -47,9 +47,9 @@ subnet = {
   }
 
   subnet2 = {
-    subnet_name      = "meharsubnet2"
-    vnet_name        = "meharVnet"
-    rg_name          = "mehar_rg"
+    subnet_name      = "santansubnet2"
+    vnet_name        = "santanVnet"
+    rg_name          = "santan_rg"
     address_prefixes = ["10.0.1.0/24"]
 
     private_endpoint_network_policies     = "Disabled"
@@ -70,12 +70,12 @@ subnet = {
 public_ip = {
   lbpip = {
     pip_name          = "mehapip1"
-    rg_name           = "mehar_rg"
+    rg_name           = "santan_rg"
     location          = "east us"
     allocation_method = "Static"
     sku               = "Standard"
     idle_timeout_in_minutes = 10
-    domain_name_label = "mehar-lb"
+    domain_name_label = "santan-lb"
     zones             = ["1", "2", "3"]
     tags = {
       environment = "dev"
@@ -85,22 +85,22 @@ public_ip = {
 
   bastion_pip = {
     pip_name          = "mehapip2"
-    rg_name           = "mehar_rg"
+    rg_name           = "santan_rg"
     location          = "east us"
     allocation_method = "Static"
     sku               = "Standard"
-    domain_name_label = "mehar-bastion"
+    domain_name_label = "santan-bastion"
   }
 
   # natgateway_pip = {
   #   pip_name          = "mehapip3"
-  #   rg_name           = "mehar_rg"
+  #   rg_name           = "santan_rg"
   #   location          = "east us"
   #   allocation_method = "Static"
   #   sku               = "Standard"
   #   tags = {
   #     environment = "network"
-  #     owner       = "mehar"
+  #     owner       = "santan"
   #   }
   # }
 }
@@ -108,28 +108,28 @@ public_ip = {
 
 network_nic = {
   nic1 = {
-    nic_name        = "meharnic1"
+    nic_name        = "santannic1"
     location        = "east us"
-    rg_name         = "mehar_rg"
+    rg_name         = "santan_rg"
     ip_config_name  = "internal"
     private_ip_meth = "Dynamic"
-    subnet_name     = "meharsubent1"
-    vnet_name       = "meharVnet"
+    subnet_name     = "santansubent1"
+    vnet_name       = "santanVnet"
     enable_accelerated_networking = true
     tags = {
       environment = "dev"
-      owner       = "mehar"
+      owner       = "santan"
     }
   }
 
   nic2 = {
-    nic_name        = "meharnic2"
+    nic_name        = "santannic2"
     location        = "east us"
-    rg_name         = "mehar_rg"
+    rg_name         = "santan_rg"
     ip_config_name  = "internal"
     private_ip_meth = "Dynamic"
-    subnet_name     = "meharsubent2"
-    vnet_name       = "meharVnet"
+    subnet_name     = "santansubent2"
+    vnet_name       = "santanVnet"
     enable_ip_forwarding = true
   }
 }
@@ -138,22 +138,22 @@ network_nic = {
 virtual_machine = {
   vm1 = {
     vm_name        = "lbvm1"
-    rg_name        = "mehar_rg"
+    rg_name        = "santan_rg"
     location       = "east us"
     vm_size        = "Standard_F2"
-    admin_username = "Useradmin"
-    admin_password = "Useradmin@1234"
-    nic_name       = "meharnic1"
+    admin_username = "Santansre"
+    admin_password = "Santansre@1234"
+    nic_name       = "santannic1"
   }
 
   vm2 = {
     vm_name        = "lbvm2"
-    rg_name        = "mehar_rg"
+    rg_name        = "santan_rg"
     location       = "east us"
     vm_size        = "Standard_F2"
-    admin_username = "Useradmin"
-    admin_password = "Useradmin@1234"
-    nic_name       = "meharnic2"
+    admin_username = "Santansre"
+    admin_password = "Santansre@1234"
+    nic_name       = "santannic2"
   }
 }
 
@@ -162,7 +162,7 @@ loadbalancer = {
   lb1 = {
     lb_name           = "TestLoadBalancer"
     location          = "east us"
-    rg_name           = "mehar_rg"
+    rg_name           = "santan_rg"
     frontend_ip_name  = "frontendlbip"
     backend_pool_name = "BackEndAddressPool"
     lb_rule_name      = "newrule1"
@@ -179,7 +179,7 @@ network_nsg = {
   nsg1 = {
     nsg_name = "web-nsg"
     location = "eastus"
-    rg_name  = "mehar_rg"
+    rg_name  = "santan_rg"
 
     rules = [
       {
@@ -210,7 +210,7 @@ network_nsg = {
   nsg2 = {
     nsg_name = "db-nsg"
     location = "eastus"
-    rg_name  = "mehar_rg"
+    rg_name  = "santan_rg"
     rules = [
       {
         rule_name                  = "allow-sql"
@@ -232,7 +232,7 @@ azure_bastion = {
   bastion1 = {
     bastion_name        = "demo-bastion"
     location            = "eastus"
-    rg_name             = "mehar_rg"
+    rg_name             = "santan_rg"
     vnet_name           = "demo-vnet"
     bastion_subnetname  = "AzureBastionSubnet"
     address_prefixes    = ["10.0.3.0/27"]
@@ -245,13 +245,13 @@ sql_data_server = {
   sqldata = {
 
     sql_server_name = "mssqlserver"
-    rg_name         = "mehar_rg"
+    rg_name         = "santan_rg"
     location        = "east us"
     version         = "12.0"
-    userlogin       = "Useradmin"
-    userpassword    = "Useradmin@1234"
+    userlogin       = "Santansre"
+    userpassword    = "Santansre@1234"
     minimum_version = "1.2"
-    database_name = "mehardb-db"
+    database_name = "santandb-db"
 
   }
 
@@ -261,9 +261,9 @@ sql_data_server = {
 
 keyvaults = {
   kv-eastus = {
-    keyvault_name       = "mehar-kv-eastus"
+    keyvault_name       = "santan-kv-eastus"
     location            = "East US"
-    rg_name         = "mehar_rg"
+    rg_name         = "santan_rg"
     sku_name            = "premium"
     soft_delete_retention_days = 30
     key_permissions     = ["Create", "Get", "List"]
@@ -278,10 +278,10 @@ aks_clusters = {
   dev = {
     cluster_name       = "aks-dev"
     location           = "eastus"
-    rg_name            = "mehar_rg"
+    rg_name            = "santan_rg"
     dns_prefix         = "devaks"
     kubernetes_version = "1.30.0"
-    identity_type      = "SystemAssigned"     # 👈 added
+    identity_type      = "SystemAssigned"     
 
     default_node_pool = {
       name        = "systempool"
